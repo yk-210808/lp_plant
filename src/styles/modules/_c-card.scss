@@ -1,0 +1,598 @@
+@use "../mixin/mixin"as *;
+@use "../setting/setting"as *;
+
+.c-card {
+  position: relative;
+  z-index: 2;
+  padding-top: 1px;
+  display: block;
+
+  @include pc {
+    margin-top: 110px;
+
+    @include min(1021) {}
+  }
+
+  .box {
+    padding: 26px 26px 85px 26px;
+
+    @include pc {
+      margin-top: -137px;
+    }
+
+    @include sp {
+      padding: 20px 20px 48px 20px;
+    }
+  }
+
+  .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 77px;
+    overflow: hidden;
+    pointer-events: none;
+    left: 0;
+    bottom: 0;
+    @include shadow;
+
+    @include sp {
+      border-radius: 30px;
+    }
+  }
+
+  .inn {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      border-radius: 77px;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      border: 2px solid transparent;
+      background: linear-gradient(-45deg, #fff, #000, #fff) border-box border-box;
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0) border-box;
+      mask-composite: exclude;
+      opacity: 0.3;
+
+      @include sp {
+        border-radius: 30px;
+      }
+    }
+
+
+
+    &::after {
+      position: absolute;
+      content: '';
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: -25px;
+      bottom: -25px;
+      right: -25px;
+      left: -25px;
+      // background-color: rgba($color: #fff, $alpha: 0.05);
+      // background-color: rgba($color: #fff, $alpha: 0.5);
+      // filter: blur(25px);
+      margin: auto;
+      backdrop-filter: blur(25px);
+      z-index: -1;
+      background: rgba($color: #fff, $alpha: 0.05);
+    }
+  }
+
+
+  .thumb {
+    height: 0;
+    padding-top: 100%;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+
+      @include pc {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  .cat {
+    font-size: 23px;
+    margin-top: 22px;
+
+    @include sp {
+      font-size: 16px;
+      margin-top: 14px;
+    }
+  }
+
+  .name {
+    font-size: 38px;
+    line-height: 1;
+    margin-top: 18px;
+    letter-spacing: 0.04em;
+
+    @include sp {
+      font-size: 24px;
+      margin-top: 12px;
+    }
+  }
+
+  .c-btn01 {
+    margin-top: 20px;
+  }
+
+  .txt-box {
+    padding: 0 45px;
+
+    @include sp {
+      padding: 0;
+    }
+  }
+
+
+  &.small {
+    margin-top: 0;
+    padding: 40px 28px 45px 40px;
+
+    @include pc {
+      max-width: 410px;
+    }
+
+    @include sp {
+      padding: 30px 20px;
+    }
+
+    .mask,
+    .mask .inn::before {
+      border-radius: 45px;
+
+      @include sp {
+        border-radius: 30px;
+      }
+    }
+
+    .review-img {
+      width: 64px;
+      padding-top: 64px;
+
+      @include sp {
+        width: 45px;
+        padding-top: 45px;
+      }
+    }
+  }
+
+  .review-items {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include sp {
+      gap: 15px;
+    }
+  }
+
+  .review-img {
+    height: 0;
+    padding-top: 100%;
+    position: relative;
+    border-radius: 555px;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .review-name {
+    font-size: 22px;
+
+    @include sp {
+      font-size: 16px;
+    }
+  }
+
+  .star {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 2px;
+
+    @include sp {
+      gap: 4px;
+
+      img {
+        height: 10px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .review-comment {
+    font-size: 17px;
+    margin-top: 22px;
+    line-height: 1.23;
+    letter-spacing: 0;
+
+    @include sp {
+      font-size: 15px;
+      margin-top: 14px;
+    }
+  }
+
+  &.wide {
+    max-width: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 33px 33px;
+
+    @include sp {
+      padding: 20px;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mask,
+    .mask .inn::before {
+      border-radius: 151px;
+
+      @include sp {
+        border-radius: 30px;
+      }
+    }
+
+    .wide-box {
+      @include pc {
+        width: 47%;
+      }
+    }
+
+    .name {
+      margin-top: 0;
+    }
+
+    &+.wide {
+      @include pc {
+        flex-direction: row-reverse;
+
+        @include min(1201) {
+          padding-left: 120px;
+        }
+      }
+    }
+  }
+
+  .overflow-img {
+    position: relative;
+    z-index: 3;
+
+    @include pc {
+      height: 600px;
+      max-width: 600px;
+
+      @include min(1201) {
+        margin-top: -140px;
+      }
+
+      @include max(1200) {
+        max-width: 50%;
+      }
+    }
+
+    @include sp {
+      height: 0;
+      padding-top: 100%;
+      width: 100%;
+    }
+
+    img {
+      height: 100%;
+      object-fit: contain;
+
+      @include sp {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .description {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 27px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+
+    @include sp {
+      font-size: 16px;
+      margin-top: 15px;
+    }
+  }
+
+  .price {
+    font-size: 38px;
+    font-weight: 500;
+    margin-top: 18px;
+
+    @include sp {
+      font-size: 22px;
+    }
+  }
+
+  .btn-items {
+    display: flex;
+    gap: 32px;
+    margin-top: 17px;
+
+    @include sp {
+      gap: 14px;
+    }
+
+    .c-btn01 {
+      margin-top: 0;
+
+      &.fit {
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+.card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.c-card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 40px;
+
+  @include max(1300) {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+
+  @include sp {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .c-card {
+    max-width: none;
+  }
+
+  .box {
+    @include pc {
+      padding-bottom: 50px;
+      padding-top: 0;
+    }
+
+    @include sp {
+      padding-bottom: 20px;
+    }
+  }
+
+  .name {
+    @include sp {
+      margin-top: 20px;
+    }
+  }
+
+  .description {
+    @include pc {
+      font-size: 24px;
+      margin-top: 35px;
+    }
+
+    @include sp {
+      margin-top: 15px;
+    }
+  }
+
+  .btn-items {
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+
+    @include sp {
+      margin-top: 18px;
+    }
+  }
+
+  .price {
+    margin-top: 0;
+    font-weight: 400;
+  }
+
+  .c-btn01 {
+    @include pc {
+      padding: 12.5px;
+    }
+
+    @include sp {
+      img {
+        width: 26px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &.review {
+    .c-card {
+      @include pc {
+        padding: 80px 40px 95px 58px;
+      }
+    }
+
+    .mask,
+    .mask .inn::before {
+      @include pc {
+        border-radius: 77px;
+      }
+    }
+
+    .review-items {
+      gap: 38px;
+
+      @include sp {
+        gap: 15px;
+      }
+    }
+
+    .review-name {
+      font-size: 38px;
+      line-height: 1;
+
+      @include sp {
+        font-size: 24px;
+      }
+    }
+
+    .star {
+      margin-top: 6px;
+      gap: 11px;
+
+      @include sp {
+        gap: 6px;
+      }
+
+      img {
+        width: 19px;
+        height: 19px;
+        object-fit: contain;
+
+        @include sp {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    .review-comment {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-top: 64px;
+      letter-spacing: 0.02em;
+
+      @include sp {
+        font-size: 16px;
+        margin-top: 20px;
+      }
+    }
+
+    .review-img {
+      width: 88px;
+      padding-top: 88px;
+
+      @include sp {
+        width: 60px;
+        padding-top: 60px;
+      }
+    }
+  }
+}
+
+.slider-wide {
+  padding-bottom: 70px;
+  margin-top: 75px;
+
+  @include sp {
+    padding-bottom: 40px;
+    margin-top: 30px;
+  }
+
+  .c-card {
+    @include pc {
+      padding: 135px 80px 135px 30px;
+
+      @include max(850) {
+        flex-direction: column;
+        padding: 40px;
+        margin-top: 0;
+
+        .overflow-img {
+          max-width: none;
+        }
+
+        .wide-box {
+          width: 100%;
+        }
+      }
+    }
+
+    @include max(850) {
+      height: 100%;
+      justify-content: flex-start;
+    }
+
+    @include sp {
+      padding-bottom: 60px;
+    }
+
+    .mask,
+    .mask .inn::before {
+      @include pc {
+        border-radius: 92px;
+      }
+    }
+  }
+
+  .name {
+    line-height: 1.21;
+  }
+
+  .description {
+    line-height: 1.14;
+    letter-spacing: .035em;
+
+    @include pc {
+      font-size: 28px;
+      margin-top: 40px;
+    }
+
+    &+.description {
+      margin-top: 50px;
+
+      @include sp {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  .btn-items {
+    margin-top: 40px;
+  }
+}

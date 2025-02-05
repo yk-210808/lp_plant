@@ -1,0 +1,134 @@
+@use "../mixin/mixin"as *;
+@use "../setting/setting"as *;
+
+.c-footer {
+  background-color: #222C1D;
+  color: #fff;
+
+  .inner-block {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 90px;
+    padding-bottom: 80px;
+
+    @include sp {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+  }
+
+  .logo {
+    font-size: 58px;
+    font-weight: 900;
+    color: rgba($color: #fff, $alpha: 0.75);
+    position: relative;
+    padding-left: 107px;
+    padding-top: 20px;
+
+    @include pc {
+      margin-left: -16px;
+    }
+
+    @include sp {
+      font-size: 24px;
+      padding-left: 60px;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 94px;
+      height: 94px;
+      background: url(/img/icon_header.png) no-repeat center / 100%;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include sp {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  .logo-area {
+    max-width: 580px;
+
+    .info {
+      font-size: 28px;
+      font-weight: 500;
+      margin-top: 38px;
+      line-height: 1.21;
+      letter-spacing: 0.03em;
+
+      @include sp {
+        font-size: 16px;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .sns-list {
+    font-size: 28px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-top: 120px;
+
+    @include sp {
+      margin-top: 40px;
+      font-size: 18px;
+      gap: 30px;
+    }
+
+    a {
+      @include pc {
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+
+  .list-ttl {
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  .link-list {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 38px;
+
+    >li {
+      &+li {
+        margin-top: 18px;
+      }
+    }
+  }
+
+  .link-area {
+    display: flex;
+    flex-direction: column;
+
+    @include max(950) {
+      display: none;
+    }
+
+    a {
+      @include pc {
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: auto;
+  }
+}

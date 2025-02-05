@@ -1,0 +1,452 @@
+@use '../mixin/mixin'as *;
+@use '../setting/setting'as *;
+
+.p_home {
+  color: rgba($color: #fff, $alpha: 0.75);
+  background-color: #1B2316;
+  letter-spacing: 0.03em;
+
+  .main-bg {
+    background: url(/img/bg_mv.jpg) no-repeat top / cover;
+    padding-top: 168px;
+
+    @include sp {
+      padding-top: 60px;
+    }
+  }
+
+  .mv-block {
+    .inner-block {
+      padding-top: 110px;
+
+      @include sp {
+        padding-top: 60px;
+      }
+    }
+
+    .ttl {
+      font-size: 118px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.04em;
+
+      @include pc{
+        @include max(1120) {
+          font-size: 80px;
+        }
+      }
+
+      @include sp {
+        font-size: 50px;
+      }
+    }
+
+    .description {
+      font-size: 23px;
+      font-weight: 500;
+      margin-top: 10px;
+      line-height: 1.21;
+
+      @include pc{
+        @include max(1120) {
+          font-size: 18px;
+        }
+      }
+
+      @include sp {
+        font-size: 16px;
+        margin-top: 15px;
+      }
+    }
+
+    .demo-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      @include pc {
+        &:hover {
+          .icon {
+            background-color: $primary;
+          }
+        }
+      }
+
+      @include sp {
+        flex-shrink: 0;
+        gap: 10px;
+      }
+
+
+      .icon {
+        display: block;
+        width: 64px;
+        height: 64px;
+        border: 2px solid currentColor;
+        border-radius: 555px;
+        position: relative;
+        transition: background-color $transition01;
+        flex-shrink: 0;
+
+        @include sp {
+          width: 45px;
+          height: 45px;
+        }
+
+        &::after {
+          position: absolute;
+          content: '';
+          width: 23px;
+          height: 26px;
+          background: url(/img/icon_play.svg) no-repeat center / 100%;
+          right: 0;
+          left: 4px;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+
+          @include sp {
+            width: 16px;
+            height: 18px;
+          }
+        }
+
+      }
+
+      .txt {
+        font-size: 20px;
+
+        @include sp {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .btn-items {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      margin-top: 16px;
+
+      @include pc {
+        flex-wrap: wrap;
+      }
+
+      @include sp {
+        margin-top: 30px;
+      }
+    }
+
+    .ttl-area {
+      max-width: 900px;
+    }
+
+    .mv-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+
+      @include pc{
+        @include max(1020) {
+          display: block;
+        }
+      }
+
+      @include sp {
+        display: block;
+      }
+    }
+
+    .product-slide {
+      @include pc {
+        max-width: 512px;
+        @include min(1021) {
+          margin-top: -110px;
+        }
+
+        @include max(1020) {
+          margin: 40px auto 0;
+        }
+      }
+
+      @include sp {
+        // max-width: 100%;
+        // width: 100%;
+        margin-top: 60px;
+      }
+    }
+
+    .review-card {
+      
+      @include min(1021) {
+        margin-top: -115px;
+      }
+
+      @include pc {
+        @include max(1020){
+          margin: 40px auto 0;
+        }
+      }
+
+      @include sp {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .trendy-block {
+    .inner-block {
+      padding-top: 69px;
+      padding-bottom: 100px;
+
+      @include sp {
+        padding-top: 100px;
+        padding-bottom: 60px;
+      }
+    }
+
+    .card-items {
+      margin-top: 4px;
+
+      @include sp {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .top-selling-block {
+    .inner-block {
+      padding-top: 140px;
+      padding-bottom: 110px;
+
+      @include sp {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+    }
+
+    .c-card-list {
+      margin-top: 100px;
+
+      @include sp {
+        margin-top: 30px;
+      }
+    }
+
+    .description {
+      @include pc {
+        margin-top: 42px;
+      }
+    }
+  }
+
+  .review-block {
+    .inner-block {
+      padding-top: 110px;
+      padding-bottom: 140px;
+
+      @include sp {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+    }
+
+    .c-card-list {
+      margin-top: 180px;
+
+      @include sp {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .best-block {
+    .inner-block {
+      padding-top: 140px;
+      padding-bottom: 247px;
+
+      @include sp {
+        padding-top: 60px;
+        padding-bottom: 100px;
+      }
+    }
+
+    .c-card {
+      color: rgba($color: #fff, $alpha: 0.75);
+    }
+  }
+}
+
+// slider
+.slider {
+  .splide__arrows {
+    svg {
+      display: none;
+    }
+  }
+
+  .splide__arrow {
+    background-color: transparent;
+    top: 75.5%;
+
+    @include sp {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      border-top: 3px solid rgba($color: #fff, $alpha: 0.75);
+      border-right: 3px solid rgba($color: #fff, $alpha: 0.75);
+
+      @include sp {
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+      }
+    }
+
+    &--prev {
+      left: 20px;
+
+      @include sp {
+        left: 4px;
+      }
+
+      &::after {
+        transform: rotate(-135deg);
+      }
+    }
+
+    &--next {
+      right: 33px;
+
+      @include sp {
+        right: 4px;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    &:disabled {
+      opacity: 0;
+    }
+  }
+
+  .splide__pagination {
+    bottom: 42px;
+
+    @include sp {
+      bottom: 20px;
+    }
+
+    &__page {
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      opacity: 1;
+      transition: width $transition01;
+      border-radius: 46px;
+      margin: 0 6px;
+
+      &.is-active {
+        width: 21px;
+        height: 6px;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.slider-wide {
+    .splide__arrows {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      position: absolute;
+      right: 90px;
+      bottom: 17%;
+
+      @include pc {
+        @include max(850) {
+          right: 40px;
+          bottom: 4%;
+        }
+      }
+
+      @include sp {
+        bottom: 2%;
+        right: 20px;
+      }
+    }
+
+    .slide-number {
+      display: flex;
+      align-items: center;
+
+      .current {
+        font-size: 20px;
+        font-weight: bold;
+
+        @include sp {
+          font-size: 16px;
+        }
+      }
+
+      .total {
+        padding-left: 0.6em;
+        position: relative;
+        font-size: 15px;
+        font-weight: bold;
+
+        @include sp {
+          font-size: 12px;
+          padding-left: 0.7em;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 18px;
+          background-color: rgba($color: #fff, $alpha: 0.75);
+          left: 0.3em;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          transform: rotate(20deg);
+        }
+      }
+    }
+
+    .splide__arrow {
+      position: static;
+      transform: none;
+
+      &:disabled {
+        opacity: 0.35;
+      }
+    }
+
+    .splide__pagination {
+      bottom: -68px;
+
+      @include sp {
+        bottom: -25px;
+      }
+
+      @include pc{
+        &__page {
+          width: 11px;
+          height: 11px;
+  
+          &.is-active {
+            width: 31px;
+          }
+        }
+      }
+    }
+  }
+}
