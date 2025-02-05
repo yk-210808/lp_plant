@@ -1,0 +1,68 @@
+@use '../mixin/mixin'as *;
+@use '../setting/setting'as *;
+
+.p_privacy {
+  .privacy-block {
+    .inner-block {
+      padding-top: 80px;
+      padding-bottom: 140px;
+
+      @include sp {
+        padding-top: 60px;
+        padding-bottom: 100px;
+      }
+    }
+
+    .c-ttl01 {
+      margin-bottom: 100px;
+
+      @include sp {
+        margin-bottom: 60px;
+      }
+    }
+
+    .ttl {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 40px 0 20px;
+      padding-left: 1.5em;
+      position: relative;
+
+      @include sp {
+        font-size: 20px;
+      }
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: 0.8em;
+        height: 3px;
+        background-color: #fff;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+
+    .txt {
+      font-size: 18px;
+      font-weight: 500;
+
+      @include sp {
+        font-size: 16px;
+        font-weight: normal;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+
+      @include pc{
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

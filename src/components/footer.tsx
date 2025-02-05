@@ -10,13 +10,13 @@ export default function Footer() {
             <p className="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <ul className="sns-list">
               <li>
-                <Link href="#">FB</Link>
+                <Link href="https://www.facebook.com/" target="_blank">FB</Link>
               </li>
               <li>
-                <Link href="#">TW</Link>
+                <Link href="https://x.com/0o__snow" target="_blank">TW</Link>
               </li>
               <li>
-                <Link href="#">LI</Link>
+                <Link href="https://www.linkedin.com/" target="_blank">LI</Link>
               </li>
             </ul>
           </div>

@@ -256,3 +256,17 @@ button::after {
   top: 0;
   left: 0;
 }
+
+.p_common {
+  color: rgba($color: #fff, $alpha: 0.75);
+  background-color: #1B2316;
+  letter-spacing: 0.03em;
+
+  &:not(.p_home){
+    padding-top: 168px;
+  
+    @include sp {
+      padding-top: 60px;
+    }
+  }
+}

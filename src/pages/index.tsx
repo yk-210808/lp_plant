@@ -4,7 +4,7 @@ import { Slider, SliderBest } from '@/components'
 
 export default function Page() {
   return (
-    <div className='p_home'>
+    <div className='p_home p_common'>
       <div className='main-bg'>
         <div className="mv-block">
           <div className="inner-block">
