@@ -268,5 +268,23 @@ button::after {
     @include sp {
       padding-top: 60px;
     }
+
+    .inner-block {
+      padding-top: 80px;
+      padding-bottom: 140px;
+
+      @include sp {
+        padding-top: 60px;
+        padding-bottom: 100px;
+      }
+    }
+
+    .c-ttl01 {
+      margin-bottom: 100px;
+
+      @include sp {
+        margin-bottom: 60px;
+      }
+    }
   }
 }

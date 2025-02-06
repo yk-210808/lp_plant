@@ -1,5 +1,5 @@
-"use client";
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+// "use client";
+import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css';
 import Link from 'next/link';
 

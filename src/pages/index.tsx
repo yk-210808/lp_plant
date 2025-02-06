@@ -1,8 +1,11 @@
 import '@/styles/page/_home.scss'
 import Link from 'next/link'
-import { Slider, SliderBest } from '@/components'
+import { Slider, SliderBest, CardList, ReviewCardList } from '@/components'
+import { apiClient } from '@/components/api/apiClient'
+import voiceType from '@/types/api/voiceType'
 
-export default function Page() {
+
+export default function Page({ voiceApiData, plantsApiData }: {voiceApiData: voiceType}) {
   return (
     <div className='p_home p_common'>
       <div className='main-bg'>
@@ -10,7 +13,7 @@ export default function Page() {
           <div className="inner-block">
             <div className='mv-main'>
               <div className="ttl-area">
-                <h2 className="ttl">Breath Natureal</h2>
+                <h1 className="ttl">Breath Natureal</h1>
                 <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <div className="btn-items">
                   <Link href="#" className="c-btn01">Explore</Link>
@@ -26,23 +29,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="c-card small review-card">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="review-items">
-                <div className="review-img"><img src="https://placehold.jp/100x100.png" alt="" /></div>
-                <div className='prof'>
-                  <p className="review-name">alena Patel</p>
-                  <div className="star">
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_half.svg" alt="" />
-                  </div>
-                </div>
-              </div>
-              <p className="review-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
-            </div>
+            <ReviewCardList limit={1} mvFlg={true} apiData={voiceApiData} />
           </div>
         </div>
         <div className="trendy-block">
@@ -82,150 +69,13 @@ export default function Page() {
       <div className="top-selling-block">
         <div className="inner-block">
           <h2 className="c-ttl01"><span className='inn'>Our Top Selling</span></h2>
-          <ul className="c-card-list">
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li className='c-card'>
-              <span className='mask'><span className='inn'></span></span>
-              <div className='box'>
-                <div className='thumb'><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='txt-box'>
-                  <p className="name">Calathea plant</p>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                  <div className='btn-items'>
-                    <p className="price">¥ 1,000</p>
-                    <Link href="#" className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <CardList currentPage={1} limit={4} category={'top_selling'} />
         </div>
       </div>
       <div className="review-block">
         <div className="inner-block">
           <h2 className="c-ttl01"><span className='inn'>Customer Review</span></h2>
-          <ul className="c-card-list review">
-            <li className="c-card small">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="review-items">
-                <div className="review-img"><img src="https://placehold.jp/100x100.png" alt="" /></div>
-                <div className='prof'>
-                  <p className="review-name">alena Patel</p>
-                  <div className="star">
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_half.svg" alt="" />
-                  </div>
-                </div>
-              </div>
-              <p className="review-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-            </li>
-            <li className="c-card small">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="review-items">
-                <div className="review-img"><img src="https://placehold.jp/100x100.png" alt="" /></div>
-                <div className='prof'>
-                  <p className="review-name">alena Patel</p>
-                  <div className="star">
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_half.svg" alt="" />
-                  </div>
-                </div>
-              </div>
-              <p className="review-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-            </li>
-            <li className="c-card small">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="review-items">
-                <div className="review-img"><img src="https://placehold.jp/100x100.png" alt="" /></div>
-                <div className='prof'>
-                  <p className="review-name">alena Patel</p>
-                  <div className="star">
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_full.svg" alt="" />
-                    <img src="/img/icon_star_half.svg" alt="" />
-                  </div>
-                </div>
-              </div>
-              <p className="review-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-            </li>
-          </ul>
+          <ReviewCardList limit={3} mvFlg={false} apiData={voiceApiData}/>
         </div>
       </div>
       <div className="best-block">
@@ -238,4 +88,16 @@ export default function Page() {
       </div>
     </div>
   )
+}
+
+export const getStaticProps = async () => {
+  const voice_data = await apiClient.get({ endpoint: 'voice' })
+  const plants_data = await apiClient.get({ endpoint: 'plants' })
+
+  return {
+    props: {
+      voiceApiData: voice_data,
+      plantsApiData: plants_data
+    }
+  }
 }

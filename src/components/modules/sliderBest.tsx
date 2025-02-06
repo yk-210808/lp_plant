@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { useState, useRef } from 'react';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';

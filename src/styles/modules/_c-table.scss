@@ -1,0 +1,43 @@
+@use "../mixin/mixin"as *;
+@use "../setting/setting"as *;
+
+.c-table {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+
+  th,
+  td {
+    font-weight: 500;
+    font-size: 20px;
+    text-align: left;
+    padding: 20px 30px;
+
+    @include sp {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+
+  th {
+    background-color: #222c1d;
+  }
+
+  tr {
+    border-top: 1px solid $clear_white;
+
+    &:last-of-type {
+      border-bottom: 1px solid $clear_white;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+
+    @include pc{
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

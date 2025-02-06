@@ -24,9 +24,7 @@ export default function Footer() {
             <p className="list-ttl">Quick Link’s</p>
             <ul className="link-list">
               <li><Link href="/"><span className="txt">Home</span></Link></li>
-              <li>
-                <Link href="#">Type’s Of plant’s</Link>
-              </li>
+              <li><Link href="/plants/all">Type’s Of plant’s</Link></li>
               <li><Link href="/contact"><span className="txt">Contact</span></Link></li>
               <li><Link href="/privacy"><span className="txt">Privacy</span></Link></li>
             </ul>

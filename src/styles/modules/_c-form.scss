@@ -1,0 +1,21 @@
+@use "../mixin/mixin"as *;
+@use "../setting/setting"as *;
+
+.c-select {
+  max-width: 200px;
+  width: 100%;
+
+  .block {
+    background-color: $bg_02;
+    border: 1px solid $clear_white;
+    color: $clear_white;
+    font-size: 18px;
+  }
+}
+
+.c-select-box {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 18px;
+}

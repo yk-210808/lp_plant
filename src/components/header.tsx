@@ -101,7 +101,7 @@ export default function Header() {
     <header>
       <div id="header" className="c-header" ref={headerRef}>
         <div className="inner-block">
-          <h1><Link href="/" className="logo"><span className="txt">Planto.</span></Link></h1>
+          <div><Link href="/" className="logo"><span className="txt">Planto.</span></Link></div>
           <ul className="link" ref={menuRef}>
             <li><Link href="/"><span className="txt">Home</span></Link></li>
             <li>

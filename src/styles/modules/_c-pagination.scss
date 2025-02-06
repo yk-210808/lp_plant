@@ -1,0 +1,104 @@
+@use "../mixin/mixin"as *;
+@use "../setting/setting"as *;
+
+.c-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 80px;
+
+  @include sp {
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .num {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border-radius: 555px;
+    border: 2px solid $clear_white;
+    color: $clear_white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+    @include sp {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+
+    &.current {
+      background-color: #005f28;
+      pointer-events: none;
+    }
+
+    @include pc {
+      &:hover {
+        background-color: #005f28;
+      }
+    }
+  }
+
+  .arrow {
+    width: 60px;
+    height: 60px;
+    position: relative;
+
+    @include sp {
+      width: 30px;
+      height: 30px;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 30px;
+      height: 30px;
+      border-top: 5px solid $clear_white;
+      border-right: 5px solid $clear_white;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      transition: $transition01;
+
+      @include sp {
+        width: 15px;
+        height: 15px;
+        border-width: 2px 2px 0 0;
+      }
+    }
+
+    &.prev {
+      &::before {
+        transform: rotate(-135deg);
+      }
+
+      @include pc {
+        &:hover {
+          &::before {
+            left: -15px;
+          }
+        }
+      }
+    }
+
+    &.next {
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      @include pc {
+        &:hover {
+          &::before {
+            right: -15px;
+          }
+        }
+      }
+    }
+  }
+}
