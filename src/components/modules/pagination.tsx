@@ -26,22 +26,16 @@ export const Pagination = ({ currentPage, limit, count, path }: Props) => {
 
   return (
     <div className="c-pagination">
-      <Link href={`${path}?p=${currentPage - 1}`} aria-label="Previous Page" className="arrow prev">
-        <span
-          className={`${currentPage === 1 || count < limit ? "cursor-not-allowed" : ""}`}
-          // disabled={currentPage === 1}
-        />
+      <Link href={`${path}?p=${currentPage - 1}`} aria-label="Previous Page" className={`arrow prev ${currentPage === 1 ? 'disabled' : ''}`}>
+        <span className={`${currentPage === 1 || count < limit ? "cursor-not-allowed" : ""}`} />
       </Link>
       {pageNumbers.map((number) => (
         <Link key={number} href={`${path}?p=${number}`} className={`num ${currentPage === number ? "current" : ""}`}>
           {number}
         </Link>
       ))}
-      <Link href={`${path}?p=${currentPage + 1}`} aria-label="Next Page" className="arrow next">
-        <span
-          className={`${currentPage === totalPages || count < limit ? "cursor-not-allowed" : ""}`}
-          // disabled={currentPage === totalPages}
-        />
+      <Link href={`${path}?p=${currentPage + 1}`} aria-label="Next Page" className={`arrow next ${currentPage === totalPages ? 'disabled' : ''}`}>
+        <span className={`${currentPage === totalPages || count < limit ? "cursor-not-allowed" : ""}`} />
       </Link>
     </div>
   );

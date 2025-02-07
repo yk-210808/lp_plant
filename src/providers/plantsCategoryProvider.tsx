@@ -1,0 +1,32 @@
+import { useState, useEffect, useContext } from "react";
+import { plantsCategoryContext } from "@/contexts/plantsCategoryContext";
+import { plantsCategoryType, contents } from "@/types/api/plantsCategoryType";
+import { apiClient } from "@/components/api/apiClient";
+
+export const PlantsCategoryProvider = ({ children }: { children: React.ReactNode }) => {
+  const [plantsCategory, setPlantsCategory] = useState<contents[]>([])
+  const value = { plantsCategory, setPlantsCategory }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response: plantsCategoryType = await apiClient.get({ endpoint: "plants_category" });
+        setPlantsCategory(response.contents);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return <plantsCategoryContext.Provider value={value}>{children}</plantsCategoryContext.Provider>
+}
+
+export const usePlantsCategory = () => {
+  const context = useContext(plantsCategoryContext);
+  if (!context) {
+    throw new Error("usePlantsCategory は PlantsCategoryProvider 内で使用してください");
+  }
+  return context;
+};

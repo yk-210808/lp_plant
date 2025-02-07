@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {voiceType, contents} from '@/types/api/voiceType'
+import { voiceType, contents } from '@/types/api/voiceType'
 
 type Props = {
   limit: number;
@@ -31,46 +31,52 @@ const Parent: React.FC<ParentProps> = ({ children, mvFlg }) => {
 
 export const ReviewCardList: React.FC<Props> = ({ limit, mvFlg, apiData }) => {
   const [data, setData] = useState<contents[]>([])
-  
-  useEffect(() => {
-    if(apiData && data.length === 0){
-      const api = apiData.contents;
-      
-      if(mvFlg){
-        const newData = api.filter((value) => value.mv_flg)
-        setData(newData)
-      }else{
-        // 取得個数をlimitに合わせる
-        const newData = api.filter((value) => !value.mv_flg)
-        setData(newData)
-      }
-    }
 
-    
-    
-  })
-  
+  const getDecimalPoint = function (number: number) {
+    const numbers = String(number).split('.');
+    return numbers[1] ? Number(numbers[1]) : 0;
+  };
+
+  /**
+   * APIデータをフィルタリング
+   */
+  useEffect(() => {
+    let newData = [] as contents[]
+
+    if (apiData && data.length === 0) {
+      const api = apiData.contents;
+
+      if (mvFlg) {
+        newData = api.filter((value) => value.mv_flg)
+      } else {
+        newData = api.filter((value) => !value.mv_flg).slice(0, limit)
+      }
+
+      if (newData.length > 0) setData(newData)
+    }
+  }, [])
+
   return (
     <>
-
       <Parent mvFlg={mvFlg}>
-        <div className="c-card small">
-          <span className='mask'><span className='inn'></span></span>
-          <div className="review-items">
-            <div className="review-img"><img src="https://placehold.jp/100x100.png" alt="" /></div>
-            <div className='prof'>
-              <p className="review-name">alena Patel</p>
-              <div className="star">
-                <img src="/img/icon_star_full.svg" alt="" />
-                <img src="/img/icon_star_full.svg" alt="" />
-                <img src="/img/icon_star_full.svg" alt="" />
-                <img src="/img/icon_star_full.svg" alt="" />
-                <img src="/img/icon_star_half.svg" alt="" />
+        {data.length > 0 && data.map((value) => (
+          <div className="c-card small" key={value.id}>
+            <span className='mask'><span className='inn'></span></span>
+            <div className="review-items">
+              <div className="review-img"><img src={value.image.url} alt="" /></div>
+              <div className='prof'>
+                <p className="review-name">{value.name}</p>
+                <div className="star">
+                  {Array(Math.trunc(value.evaluation[0])).fill(null).map((_, index) => (
+                    <img key={index + 1} src="/img/icon_star_full.svg" alt="" />
+                  ))}
+                  { getDecimalPoint(value.evaluation[0]) > 0 && <img src="/img/icon_star_half.svg" alt="" /> }
+                </div>
               </div>
             </div>
+            <p className="review-comment">{value.review}</p>
           </div>
-          <p className="review-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
-        </div>
+        ))}
       </Parent>
     </>
   )

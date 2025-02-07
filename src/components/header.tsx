@@ -1,8 +1,10 @@
 import Link from "next/link"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, useContext } from "react"
 import { slideUp, slideDown } from "@/utils/slideUtil"
 import { useScrollCtrl } from "@/hooks/useScrollCtrl"
 import { checkBreakPoint } from "@/utils/resizeUtil"
+import { plantsCategoryContext } from "@/contexts/plantsCategoryContext"
+import { isObjectEmpty } from "@/utils/commonUtil"
 
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
@@ -13,9 +15,16 @@ export default function Header() {
 
   const [menuState, setMenuState] = useState(false)
   const [subMenuState, setSubMenuState] = useState(false)
+
+  const { plantsCategory } = useContext(plantsCategoryContext)
+
   const setScrollOffFlg = useScrollCtrl()
 
   const breakPoint = 768
+
+  if (!isObjectEmpty(plantsCategory)) {
+    // console.log(plantsCategory[0].title);
+  }
 
   // header bg
   useEffect(() => {
@@ -69,7 +78,7 @@ export default function Header() {
   }, [subMenuState])
 
   const handleSubMenu = () => {
-    if (subMenuRef.current) {
+    if (subMenuRef.current && checkBreakPoint() === 1) {
       if (subMenuTriggerRef.current) {
         if (!subMenuState) {
           setSubMenuState(true)
@@ -97,6 +106,7 @@ export default function Header() {
     mql.addListener(resizeEvent)
   }, [])
 
+
   return (
     <header>
       <div id="header" className="c-header" ref={headerRef}>
@@ -108,15 +118,11 @@ export default function Header() {
               <p className="no-link" ref={subMenuTriggerRef} onClick={handleSubMenu}>Plants Type</p>
               <div className="type-list" ref={subMenuRef}>
                 <ul className="inn">
-                  <li>
-                    <Link href="#">1</Link>
-                  </li>
-                  <li>
-                    <Link href="#">2</Link>
-                  </li>
-                  <li>
-                    <Link href="#">3</Link>
-                  </li>
+                  {!isObjectEmpty(plantsCategory) && plantsCategory.map((value) => (
+                    <li key={value.id}>
+                      <Link href={`/plants/${value.slug}`}>{value.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </li>
@@ -125,7 +131,7 @@ export default function Header() {
           </ul>
           <div className="nav-area">
             <button type="button" className="nav-btn"><img src="/img/icon_search.png" alt="" /></button>
-            <Link href="#" className="nav-btn opacity-75"><img src="/img/icon_bag.png" alt="" /></Link>
+            <Link href="#" className="nav-btn opacity-80"><img src="/img/icon_bag.png" alt="" /></Link>
             <button type="button" className="nav-btn hamburger sp" ref={hamburgerRef} onClick={handleMenu}>
               <span></span>
               <span></span>
@@ -136,3 +142,4 @@ export default function Header() {
     </header>
   )
 }
+

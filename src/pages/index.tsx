@@ -2,10 +2,10 @@ import '@/styles/page/_home.scss'
 import Link from 'next/link'
 import { Slider, SliderBest, CardList, ReviewCardList } from '@/components'
 import { apiClient } from '@/components/api/apiClient'
-import voiceType from '@/types/api/voiceType'
+import { voiceType } from '@/types/api/voiceType'
+import { plantsType } from '@/types/api/plantsType'
 
-
-export default function Page({ voiceApiData, plantsApiData }: {voiceApiData: voiceType}) {
+export default function Page({ voiceApiData, plantsApiData }: { voiceApiData: voiceType, plantsApiData: plantsType }) {
   return (
     <div className='p_home p_common'>
       <div className='main-bg'>
@@ -25,7 +25,7 @@ export default function Page({ voiceApiData, plantsApiData }: {voiceApiData: voi
               </div>
               <div className="product-slide-area">
                 <div className="product-slide slider">
-                  <Slider />
+                  <Slider limit={3} apiData={plantsApiData} />
                 </div>
               </div>
             </div>
@@ -35,47 +35,34 @@ export default function Page({ voiceApiData, plantsApiData }: {voiceApiData: voi
         <div className="trendy-block">
           <div className="inner-block">
             <h2 className="c-ttl01"><span className='inn'>Our Trendy plants</span></h2>
-            <div className='card-items'>
-              <div className="c-card wide">
-                <span className='mask'><span className='inn'></span></span>
-                <div className="overflow-img"><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='wide-box'>
-                  <h3 className="name">For Small Decs Ai Plat</h3>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                  <p className="price">¥ 1,000</p>
-                  <div className="btn-items">
-                    <Link href="#" className="c-btn01">Explore</Link>
-                    <Link href="#" className="c-btn01 fit"><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-              <div className="c-card wide">
-                <span className='mask'><span className='inn'></span></span>
-                <div className="overflow-img"><img src="https://placehold.jp/500x500.png" alt="" /></div>
-                <div className='wide-box'>
-                  <h3 className="name">For Small Decs Ai Plat</h3>
-                  <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                  <p className="price">¥ 1,000</p>
-                  <div className="btn-items">
-                    <Link href="#" className="c-btn01">Explore</Link>
-                    <Link href="#" className="c-btn01 fit"><img src="/img/icon_bag.png" alt="" /></Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CardList
+              currentPage={1}
+              limit={2}
+              category={'all'}
+              type={'items'}
+              condition={'trendy'}
+              apiData={plantsApiData}
+            />
           </div>
         </div>
       </div>
       <div className="top-selling-block">
         <div className="inner-block">
           <h2 className="c-ttl01"><span className='inn'>Our Top Selling</span></h2>
-          <CardList currentPage={1} limit={4} category={'top_selling'} />
+          <CardList
+            currentPage={1}
+            limit={6}
+            category={'all'}
+            type={'list'}
+            condition={'best'}
+            apiData={plantsApiData}
+          />
         </div>
       </div>
       <div className="review-block">
         <div className="inner-block">
           <h2 className="c-ttl01"><span className='inn'>Customer Review</span></h2>
-          <ReviewCardList limit={3} mvFlg={false} apiData={voiceApiData}/>
+          <ReviewCardList limit={3} mvFlg={false} apiData={voiceApiData} />
         </div>
       </div>
       <div className="best-block">

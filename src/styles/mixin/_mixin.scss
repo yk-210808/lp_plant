@@ -53,7 +53,7 @@
 
 // settingで指定した幅を基準にvwを返す
 @function vw($size, $viewport: s.$vw_standard_width) {
-  $rate: 100 / $viewport;
+  $rate: calc(100 / $viewport);
   @return $rate * $size * 1vw;
 }
 

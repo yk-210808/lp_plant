@@ -292,7 +292,8 @@
     }
   }
 
-  .overflow-img {
+  .overflow-img,
+  &.wide .thumb {
     position: relative;
     z-index: 3;
 
