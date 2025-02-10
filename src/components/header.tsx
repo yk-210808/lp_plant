@@ -22,10 +22,6 @@ export default function Header() {
 
   const breakPoint = 768
 
-  if (!isObjectEmpty(plantsCategory)) {
-    // console.log(plantsCategory[0].title);
-  }
-
   // header bg
   useEffect(() => {
     if (headerRef.current) {
@@ -117,7 +113,7 @@ export default function Header() {
             <li>
               <p className="no-link" ref={subMenuTriggerRef} onClick={handleSubMenu}>Plants Type</p>
               <div className="type-list" ref={subMenuRef}>
-                <ul className="inn">
+                <ul className="inn capitalize">
                   {!isObjectEmpty(plantsCategory) && plantsCategory.map((value) => (
                     <li key={value.id}>
                       <Link href={`/plants/${value.slug}`}>{value.title}</Link>

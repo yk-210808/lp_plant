@@ -11,6 +11,10 @@
     color: $clear_white;
     font-size: 18px;
   }
+
+  * {
+    text-transform: capitalize;
+  }
 }
 
 .c-select-box {
