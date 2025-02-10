@@ -1,8 +1,10 @@
 // "use client";
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Link from 'next/link';
+import { plantsCategoryContext } from '@/contexts/plantsCategoryContext';
+import { convertLfToBr } from '@/utils/commonUtil';
 
 interface SplideInstance {
   index: number;
@@ -16,6 +18,14 @@ export const SliderBest = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
 
+  const { plantsCategory } = useContext(plantsCategoryContext)
+
+  useEffect(() => {
+    if (splideRef.current) {
+      setTotalSlides((splideRef.current as any).splide.length)
+    }
+  }, [plantsCategory])
+
   return (
     <>
       <Splide
@@ -26,7 +36,6 @@ export const SliderBest = () => {
         }}
         onMounted={(splide: SplideInstance) => {
           splideRef.current = splide;
-          setTotalSlides(splide.length);
 
           splide.on('move', () => {
             setCurrentSlide(splide.index + 1);
@@ -34,46 +43,21 @@ export const SliderBest = () => {
         }}
       >
         <SplideTrack>
-          <SplideSlide>
-            <div className="c-card wide">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="overflow-img"><img src="https://placehold.jp/500x500.png" alt="" /></div>
-              <div className='wide-box'>
-                <h3 className="name">We Have Small And Best O2 Plants Collection’s</h3>
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <div className="btn-items">
-                  <Link href="#" className="c-btn01">Explore</Link>
+          {plantsCategory.length > 0 && plantsCategory.map((value) => (
+            <SplideSlide key={value.id}>
+              <div className="c-card wide">
+                <span className='mask'><span className='inn'></span></span>
+                <div className="overflow-img"><img src={value.image.url} alt="" /></div>
+                <div className='wide-box'>
+                  <h3 className="name">We Have Small And Best {value.title} Collection’s</h3>
+                  <p className="description" dangerouslySetInnerHTML={{ __html: convertLfToBr(value.description) }}></p>
+                  <div className="btn-items">
+                    <Link href={`/plants/${value.slug}`} className="c-btn01">Explore</Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SplideSlide>
-          <SplideSlide>
-            <div className="c-card wide">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="overflow-img"><img src="https://placehold.jp/500x500.png" alt="" /></div>
-              <div className='wide-box'>
-                <h3 className="name">For Small Decs Ai Plat</h3>
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <div className="btn-items">
-                  <Link href="#" className="c-btn01">Explore</Link>
-                </div>
-              </div>
-            </div>
-          </SplideSlide>
-          <SplideSlide>
-            <div className="c-card wide">
-              <span className='mask'><span className='inn'></span></span>
-              <div className="overflow-img"><img src="https://placehold.jp/500x500.png" alt="" /></div>
-              <div className='wide-box'>
-                <h3 className="name">For Small Decs Ai Plat</h3>
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <div className="btn-items">
-                  <Link href="#" className="c-btn01">Explore</Link>
-                </div>
-              </div>
-            </div>
-          </SplideSlide>
+            </SplideSlide>
+          ))}
         </SplideTrack>
         <div className="splide__arrows">
           <button className="splide__arrow splide__arrow--prev"></button>

@@ -16,8 +16,8 @@ export default function Page({ voiceApiData, plantsApiData }: { voiceApiData: vo
                 <h1 className="ttl">Breath Natureal</h1>
                 <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <div className="btn-items">
-                  <Link href="#" className="c-btn01">Explore</Link>
-                  <Link href="#" className='demo-btn'>
+                  <Link href="/plants/all" className="c-btn01">Explore</Link>
+                  <Link href="/plants/all" className='demo-btn'>
                     <span className="icon"></span>
                     <span className="txt">Live Demo...</span>
                   </Link>
