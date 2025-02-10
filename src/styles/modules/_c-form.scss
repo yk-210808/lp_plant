@@ -89,3 +89,30 @@ label {
     }
   }
 }
+
+.c-textInput {
+  input {
+    background-color: $bg_02;
+    color: $clear_white;
+    border: 2px solid $clear_white;
+
+    &:focus {
+      background-color: $bg_02;
+      border-color: $clear_white;
+    }
+  }
+}
+
+textarea {
+  &.c-textInput {
+    background-color: $bg_02;
+    color: $clear_white;
+    padding: 10px;
+    border: 2px solid $clear_white;
+
+    &:focus {
+      background-color: $bg_02;
+      border-color: $clear_white;
+    }
+  }
+}

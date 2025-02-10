@@ -22,14 +22,12 @@ export default function Search() {
       <div className="search-block">
         <div className="inner-block">
           <h1 className="c-ttl01"><span className="inn">Search</span></h1>
-          <form action="/plants/all" method="GET" name="form">
-            <div className="c-search-input justify-center">
-              <FloatingLabel variant="outlined" label="search" className="c-input" onChange={(e) => handleInput(e)} />
-              <Button size="sm" className="c-search-btn" onClick={handleClick}>
-                <FaSearch className="h-7 w-4" />
-              </Button>
-            </div>
-          </form>
+          <div className="c-search-input justify-center">
+            <FloatingLabel variant="outlined" label="search" className="c-input" onChange={(e) => handleInput(e)} />
+            <Button size="sm" className="c-search-btn" onClick={handleClick}>
+              <FaSearch className="h-7 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

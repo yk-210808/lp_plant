@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
+    "@types/nodemailer": "^6.4.17",
     "flowbite-react": "^0.10.2",
     "microcms-js-sdk": "^3.1.2",
     "next": "15.1.6",
+    "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
