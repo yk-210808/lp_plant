@@ -7,7 +7,7 @@
 
   .block {
     background-color: $bg_02;
-    border: 1px solid $clear_white;
+    border: 2px solid $clear_white;
     color: $clear_white;
     font-size: 18px;
   }
@@ -22,4 +22,70 @@
   align-items: center;
   gap: 30px;
   font-size: 18px;
+
+  >p {
+    flex-shrink: 0;
+  }
+}
+
+.c-input {
+  background-color: $bg_02;
+
+  &:focus {
+    background-color: $bg_02;
+    color: $clear_white;
+  }
+}
+
+input[type=text] {
+  &.c-input {
+    border: 2px solid $clear_white;
+  }
+}
+
+label {
+  &.c-input {
+    background-color: $bg_02;
+    color: $clear_white !important;
+  }
+}
+
+.relative {
+  &~.c-input {
+    display: none;
+  }
+}
+
+.c-search-btn {
+  background-color: $bg_02;
+  color: $clear_white;
+  border: 2px solid $clear_white;
+
+  @include pc {
+    &:hover {
+      background-color: #005f28 !important;
+    }
+  }
+
+  @include sp {
+    &:hover {
+      background-color: $bg_02 !important;
+    }
+  }
+}
+
+.c-search-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  input[type=text] {
+    &.c-input {
+      width: 600px;
+
+      @include sp {
+        width: 100%;
+      }
+    }
+  }
 }

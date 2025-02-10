@@ -1,10 +1,10 @@
 import Link from "next/link"
 import React, { useEffect, useRef, useState, useContext } from "react"
-import { slideUp, slideDown } from "@/utils/slideUtil"
 import { useScrollCtrl } from "@/hooks/useScrollCtrl"
+import { slideUp, slideDown } from "@/utils/slideUtil"
 import { checkBreakPoint } from "@/utils/resizeUtil"
-import { plantsCategoryContext } from "@/contexts/plantsCategoryContext"
 import { isObjectEmpty } from "@/utils/commonUtil"
+import { plantsCategoryContext } from "@/contexts/plantsCategoryContext"
 
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
@@ -126,7 +126,7 @@ export default function Header() {
             <li><Link href="/contact"><span className="txt">Contact</span></Link></li>
           </ul>
           <div className="nav-area">
-            <button type="button" className="nav-btn"><img src="/img/icon_search.png" alt="" /></button>
+            <Link href="/search" className="nav-btn"><img src="/img/icon_search.png" alt="" /></Link>
             <Link href="#" className="nav-btn opacity-80"><img src="/img/icon_bag.png" alt="" /></Link>
             <button type="button" className="nav-btn hamburger sp" ref={hamburgerRef} onClick={handleMenu}>
               <span></span>

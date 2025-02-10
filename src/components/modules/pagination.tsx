@@ -6,9 +6,11 @@ type Props = {
   limit: number; // 一件あたりに表示する件数
   count: number; // 全件数
   path: string; // ページネーションを呼び出すページパス
+  param?: string;
 };
 
-export const Pagination = ({ currentPage, limit, count, path }: Props) => {
+export const Pagination = ({ currentPage, limit, count, path, param }: Props) => {
+  const searchParam = param ? `&search=${param}` : '';
   const totalPages = Math.ceil(count / limit);
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, currentPage + 2);
@@ -26,15 +28,15 @@ export const Pagination = ({ currentPage, limit, count, path }: Props) => {
 
   return (
     <div className="c-pagination">
-      <Link href={`${path}?p=${currentPage - 1}`} aria-label="Previous Page" className={`arrow prev ${currentPage === 1 ? 'disabled' : ''}`}>
+      <Link href={`${path}?p=${currentPage - 1}${searchParam}`} aria-label="Previous Page" className={`arrow prev ${currentPage === 1 ? 'disabled' : ''}`}>
         <span className={`${currentPage === 1 || count < limit ? "cursor-not-allowed" : ""}`} />
       </Link>
       {pageNumbers.map((number) => (
-        <Link key={number} href={`${path}?p=${number}`} className={`num ${currentPage === number ? "current" : ""}`}>
+        <Link key={number} href={`${path}?p=${number}${searchParam}`} className={`num ${currentPage === number ? "current" : ""}`}>
           {number}
         </Link>
       ))}
-      <Link href={`${path}?p=${currentPage + 1}`} aria-label="Next Page" className={`arrow next ${currentPage === totalPages ? 'disabled' : ''}`}>
+      <Link href={`${path}?p=${currentPage + 1}${searchParam}`} aria-label="Next Page" className={`arrow next ${currentPage === totalPages ? 'disabled' : ''}`}>
         <span className={`${currentPage === totalPages || count < limit ? "cursor-not-allowed" : ""}`} />
       </Link>
     </div>
