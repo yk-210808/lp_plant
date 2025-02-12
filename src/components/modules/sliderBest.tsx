@@ -9,14 +9,15 @@ import Image from "next/image"
 // import type { Splide as SplideInstance } from "@splidejs/splide"; 
 import type { Splide as SplideType } from "@splidejs/splide"; 
 
-// interface SplideInstance {
-//   index: number;
-//   length: number;
-//   on: (event: string, callback: () => void) => void;
-// }
+interface SplideInstance {
+  index: number;
+  length: number;
+  on: (event: string, callback: () => void) => void;
+  splide?: SplideType;
+}
 
 export const SliderBest = () => {
-  const splideRef = useRef<SplideType | null>(null);
+  const splideRef = useRef<SplideInstance | null>(null);
 
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
@@ -25,7 +26,9 @@ export const SliderBest = () => {
 
   useEffect(() => {
     if (splideRef.current) {
-      setTotalSlides(splideRef.current.splide.length)
+      if (splideRef.current.splide) {
+        setTotalSlides(splideRef.current.splide.length)
+      }
     }
   }, [plantsCategory])
 
