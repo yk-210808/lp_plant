@@ -1,18 +1,33 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer"
+import { z } from "zod";
+
+// validationSchema
+const contactSchema = z.object({
+  name: z.string().min(1, "Enter your name"),
+  email: z.string().email("Enter your correct email address"),
+  message: z.string().min(1, "Enter your message"),
+})
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ success: false, message: "Method Not Allowed" });
   }
 
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ success: false, message: "全てのフィールドを入力してください。" });
+  // validation
+  const validation = contactSchema.safeParse(req.body);
+  if (!validation.success) {
+    return res.status(400).json({
+      success: false,
+      message: validation.error.errors.map(err => err.message).join(", "),
+    });
   }
 
-  console.log("お問い合わせ:", { name, email, message });
+  const { name, email, message } = validation.data;
+
+  // debug
+  // console.log("お問い合わせ:", { name, email, message });
+
 
   try {
     // SMTP 設定
