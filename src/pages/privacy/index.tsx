@@ -1,4 +1,3 @@
-import '@/styles/page/_privacy.scss'
 
 export default function Privacy() {
   return (

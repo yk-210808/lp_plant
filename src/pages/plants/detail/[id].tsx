@@ -1,4 +1,3 @@
-import '@/styles/page/_plantsDetail.scss'
 import { GetStaticPropsContext } from "next";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';

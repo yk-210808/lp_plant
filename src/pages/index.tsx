@@ -1,4 +1,3 @@
-import '@/styles/page/_home.scss'
 import Link from 'next/link'
 import { Slider, SliderBest, CardList, ReviewCardList } from '@/components'
 import { apiClient } from '@/components/api/apiClient'

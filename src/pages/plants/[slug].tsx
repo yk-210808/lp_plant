@@ -1,4 +1,3 @@
-import '@/styles/page/_plants.scss'
 import { useEffect, useState, useContext, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
 import { GetServerSideProps } from "next";
