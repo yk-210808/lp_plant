@@ -1,20 +1,17 @@
 import '@/styles/page/_plantsDetail.scss'
 import { GetStaticPropsContext } from "next";
-
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Button } from 'flowbite-react';
+import { FaAmazon } from "react-icons/fa";
+import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
+import '@splidejs/react-splide/css';
 import { apiClient } from "@/components/api/apiClient"
 import { ReviewCardList, Slider } from '@/components';
 import { contents, plantsType } from "@/types/api/plantsType";
 import { voiceType } from '@/types/api/voiceType';
 import { convertLfToBr } from '@/utils/commonUtil';
-
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/react-splide/css';
-
-import { FaAmazon } from "react-icons/fa";
-
-import { Button } from 'flowbite-react';
-import { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function PlantsDetail({ plantApiData, voiceApiData }: { plantApiData: contents, voiceApiData: voiceType }) {
   const router = useRouter()
@@ -51,57 +48,65 @@ export default function PlantsDetail({ plantApiData, voiceApiData }: { plantApiD
 
 
   return (
-    <div className="p_common p_plants-detail">
-      <div className="detail-block">
-        <div className="inner-block">
-          <div className="main-items">
-            <div className="slider main-slider">
-              <Splide
-                hasTrack={false}
-                options={{
-                  gap: '40px',
-                }}
-              >
-                <SplideTrack>
-                  {sliderImage.map((value) => (
-                    <SplideSlide key={Math.random()}>
-                      <div className="slide-item">
-                        <img src={value.url} alt="" />
-                      </div>
-                    </SplideSlide>
-                  ))}
-                </SplideTrack>
-              </Splide>
+    <>
+      <Head>
+        <title>{plantApiData.name} | Planto.</title>
+        <meta property="og:title" content={plantApiData.name} />
+        <meta name="description" content={plantApiData.description}></meta>
+        <meta property="og:description" content={plantApiData.description} />
+      </Head>
+      <div className="p_common p_plants-detail">
+        <div className="detail-block">
+          <div className="inner-block">
+            <div className="main-items">
+              <div className="slider main-slider">
+                <Splide
+                  hasTrack={false}
+                  options={{
+                    gap: '40px',
+                  }}
+                >
+                  <SplideTrack>
+                    {sliderImage.map((value) => (
+                      <SplideSlide key={Math.random()}>
+                        <div className="slide-item">
+                          <img src={value.url} alt="" />
+                        </div>
+                      </SplideSlide>
+                    ))}
+                  </SplideTrack>
+                </Splide>
+              </div>
+              <div className="txt-box">
+                <h1 className="ttl">{plantApiData.name}</h1>
+                <p className="price">¥ {Number(plantApiData.price).toLocaleString()}</p>
+                <p className="description" dangerouslySetInnerHTML={{ __html: convertLfToBr(plantApiData.description) }} />
+                <Button href="https://www.amazon.co.jp/" target='_blank' color='warning' size='xl' className='btn text-black md:hover:bg-yellow-500'><span className='inn'>Buy on Amazon<FaAmazon className='icon' /></span></Button>
+              </div>
             </div>
-            <div className="txt-box">
-              <h1 className="ttl">{plantApiData.name}</h1>
-              <p className="price">¥ {Number(plantApiData.price).toLocaleString()}</p>
-              <p className="description" dangerouslySetInnerHTML={{ __html: convertLfToBr(plantApiData.description) }} />
-              <Button href="https://www.amazon.co.jp/" target='_blank' color='warning' size='xl' className='btn text-black md:hover:bg-yellow-500'><span className='inn'>Buy on Amazon<FaAmazon className='icon' /></span></Button>
+            <div className="detail-items">
+              {plantApiData.detail && (
+                <p className="detail" dangerouslySetInnerHTML={{ __html: convertLfToBr(plantApiData.detail) }} />
+              )}
+
+              {voiceApiData.contents.length > 0 && (
+                <>
+                  <h2 className="c-ttl02">Review</h2>
+                  <ReviewCardList limit={3} mvFlg={false} apiData={voiceApiData} />
+                </>
+              )}
+
+              {plantsApiData && (
+                <>
+                  <h2 className="c-ttl02">Similar Plants</h2>
+                  <div className="slider" ><Slider key={router.query.id as string} limit={6} perPage={3} apiData={plantsApiData} /></div>
+                </>
+              )}
             </div>
-          </div>
-          <div className="detail-items">
-            {plantApiData.detail && (
-              <p className="detail" dangerouslySetInnerHTML={{ __html: convertLfToBr(plantApiData.detail) }} />
-            )}
-
-            {voiceApiData.contents.length > 0 && (
-              <>
-                <h2 className="c-ttl02">Review</h2>
-                <ReviewCardList limit={3} mvFlg={false} apiData={voiceApiData} />
-              </>
-            )}
-
-            {plantsApiData && (
-              <>
-                <h2 className="c-ttl02">Similar Plants</h2>
-                <div className="slider" ><Slider key={router.query.id as string} limit={6} perPage={3} apiData={plantsApiData} /></div>
-              </>
-            )}
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 export const getStaticPaths = async () => {

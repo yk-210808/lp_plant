@@ -1,8 +1,8 @@
-import { FloatingLabel, Button } from "flowbite-react"
 import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
-import { useDebounce } from "@/hooks/useDebounce"
 import { useRouter } from "next/router"
+import { FloatingLabel, Button } from "flowbite-react"
+import { useDebounce } from "@/hooks/useDebounce"
 
 export default function Search() {
   const router = useRouter()

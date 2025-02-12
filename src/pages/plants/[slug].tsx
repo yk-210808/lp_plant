@@ -1,14 +1,15 @@
-import { useRouter } from 'next/router'
 import '@/styles/page/_plants.scss'
-import { Pagination, CardList } from '@/components'
-import { Select } from "flowbite-react";
-import { apiClient } from '@/components/api/apiClient';
-import { contents, plantsType } from '@/types/api/plantsType';
 import { useEffect, useState, useContext, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
 import { GetServerSideProps } from "next";
+import { useRouter } from 'next/router'
+import { Select } from "flowbite-react";
+import { Pagination, CardList } from '@/components'
+import { apiClient } from '@/components/api/apiClient';
+import { contents, plantsType } from '@/types/api/plantsType';
 import { plantsCategoryContext } from '@/contexts/plantsCategoryContext';
 import { isObjectEmpty } from '@/utils/commonUtil';
+import Head from 'next/head';
 
 const limit = 6;
 
@@ -25,6 +26,7 @@ export default function Plants() {
   const category = router.query.slug || "all";
   const count = plantsApiData?.totalCount ?? 0
   const categoryName = plantsCategory.find((value) => value.slug === category)?.title
+  const categoryDescription = plantsCategory.find((value) => value.slug === category)?.description
 
   const categoryId = useMemo(() => {
     if (plantsCategory.length > 0) return plantsCategory.find((value) => value.slug === category)?.id
@@ -89,31 +91,40 @@ export default function Plants() {
   }
 
   return (
-    <div className="p_common p_plants">
-      <div className="plants-block">
-        <div className="inner-block">
-          <h1 className="c-ttl01 cap"><span className='inn'>{pageTitle()}</span></h1>
-          <div className="c-select-box">
-            <p>Type :</p>
-            <Select className='c-select' value={selected} onChange={(e) => handleChange(e)}>
-              <option value="all">all</option>
+    <>
+    <Head>
+      <title>{pageTitle().toUpperCase()} | Planto.</title>
+      <meta property="og:title" content={pageTitle().toUpperCase() + " | Planto."} />
+      <meta name="description" content={categoryDescription ?? pageTitle().toUpperCase()}></meta>
+      <meta property="og:description" content={categoryDescription ?? pageTitle().toUpperCase()} />
+    </Head>
 
-              {!isObjectEmpty(plantsCategory) && plantsCategory.map((value) => (
-                <option
-                  key={value.id}
-                  value={value.slug}
-                >
-                  {value.title}
-                </option>
-              ))}
-            </Select>
+      <div className="p_common p_plants">
+        <div className="plants-block">
+          <div className="inner-block">
+            <h1 className="c-ttl01 cap"><span className='inn'>{pageTitle()}</span></h1>
+            <div className="c-select-box">
+              <p>Type :</p>
+              <Select className='c-select' value={selected} onChange={(e) => handleChange(e)}>
+                <option value="all">all</option>
+  
+                {!isObjectEmpty(plantsCategory) && plantsCategory.map((value) => (
+                  <option
+                    key={value.id}
+                    value={value.slug}
+                  >
+                    {value.title}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            {plantsApiData && <CardList currentPage={currentPage} limit={limit} category={category as string} type={'list'} apiData={plantsApiData} />}
+            {count > 0 && <Pagination path={`/plants/${router.query.slug}`} currentPage={currentPage} limit={limit} count={count} param={searchParam?.toString()} />}
+            {count === 0 && <p>Not found</p>}
           </div>
-          {plantsApiData && <CardList currentPage={currentPage} limit={limit} category={category as string} type={'list'} apiData={plantsApiData} />}
-          {count > 0 && <Pagination path={`/plants/${router.query.slug}`} currentPage={currentPage} limit={limit} count={count} param={searchParam?.toString()} />}
-          {count === 0 && <p>Not found</p>}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
