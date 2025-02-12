@@ -71,7 +71,7 @@ export const ReviewCardList: React.FC<Props> = ({ limit, mvFlg, apiData }) => {
                   {Array(Math.trunc(value.evaluation[0])).fill(null).map((_, index) => (
                     <Image width="20" height="20" key={index + 1} src="/img/icon_star_full.svg" alt="" />
                   ))}
-                  { getDecimalPoint(value.evaluation[0]) > 0 && <Image width="20" height="20" src="/img/icon_star_half.svg" alt="" /> }
+                  { getDecimalPoint(value.evaluation[0]) > 0 && <Image width="11" height="20" src="/img/icon_star_half.svg" alt="" /> }
                 </div>
               </div>
             </div>
