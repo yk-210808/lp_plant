@@ -6,15 +6,17 @@ import Link from 'next/link';
 import { plantsCategoryContext } from '@/contexts/plantsCategoryContext';
 import { convertLfToBr } from '@/utils/commonUtil';
 import Image from "next/image"
+// import type { Splide as SplideInstance } from "@splidejs/splide"; 
+import type { Splide as SplideType } from "@splidejs/splide"; 
 
-interface SplideInstance {
-  index: number;
-  length: number;
-  on: (event: string, callback: () => void) => void;
-}
+// interface SplideInstance {
+//   index: number;
+//   length: number;
+//   on: (event: string, callback: () => void) => void;
+// }
 
 export const SliderBest = () => {
-  const splideRef = useRef<SplideInstance | null>(null);
+  const splideRef = useRef<SplideType | null>(null);
 
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
@@ -23,7 +25,7 @@ export const SliderBest = () => {
 
   useEffect(() => {
     if (splideRef.current) {
-      setTotalSlides((splideRef.current as any).splide.length)
+      setTotalSlides(splideRef.current.splide.length)
     }
   }, [plantsCategory])
 
@@ -35,7 +37,7 @@ export const SliderBest = () => {
         options={{
           gap: '40px',
         }}
-        onMounted={(splide: SplideInstance) => {
+        onMounted={(splide: SplideType) => {
           splideRef.current = splide;
 
           splide.on('move', () => {
