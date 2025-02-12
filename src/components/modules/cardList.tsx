@@ -23,9 +23,6 @@ export const CardList: React.FC<Props> = ({ currentPage, limit, category, type, 
       if (condition) {
         newData = api.filter((value) => value[condition as keyof contents]).slice(0, limit);
       } 
-      // else if (category !== 'all') {
-      //   newData = api.filter((value) => value.category.slug === category)
-      // } 
       else {
         newData = api
       }
@@ -48,8 +45,8 @@ export const CardList: React.FC<Props> = ({ currentPage, limit, category, type, 
                 <p className="description">{value.description}</p>
                 <p className="price">¥ {Number(value.price).toLocaleString()}</p>
                 <div className="btn-items">
-                  <Link href="#" className="c-btn01">Explore</Link>
-                  <Link href="#" className="c-btn01 fit"><img src="/img/icon_bag.png" alt="" /></Link>
+                  <Link href="/plants/detail/[id]" as={`/plants/detail/${value.id}`} className="c-btn01">Explore</Link>
+                  <Link href="/plants/detail/[id]" as={`/plants/detail/${value.id}`} className="c-btn01 fit"><img src="/img/icon_bag.png" alt="" /></Link>
                 </div>
               </div>
             </>
@@ -62,7 +59,7 @@ export const CardList: React.FC<Props> = ({ currentPage, limit, category, type, 
                 <p className="description">{value.description}</p>
                 <div className='btn-items'>
                   <p className="price">¥ {Number(value.price).toLocaleString()}</p>
-                  <Link href="https://www.amazon.co.jp/" target='_blank' className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
+                  <Link href="/plants/detail/[id]" as={`/plants/detail/${value.id}`} className='c-btn01 fit'><img src="/img/icon_bag.png" alt="" /></Link>
                 </div>
               </div>
             </div>

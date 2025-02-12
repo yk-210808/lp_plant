@@ -12,7 +12,6 @@ export default function Contact() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +20,6 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -35,7 +33,7 @@ export default function Contact() {
     if (result.success) {
       router.push("/contact/complete");
     } else {
-      setError("送信に失敗しました。もう一度お試しください。");
+      alert("Transmission failed. Please try again.")
     }
   };
 
@@ -44,7 +42,6 @@ export default function Contact() {
       <div className="contact-block">
         <div className="inner-block">
           <h1 className="c-ttl01"><span className="inn">Contact</span></h1>
-
           <form onSubmit={handleSubmit}>
             <table className="c-table">
               <tbody>
@@ -62,7 +59,6 @@ export default function Contact() {
                 </tr>
               </tbody>
             </table>
-  
             <Button size="xl" className="c-search-btn mt-24 mr-auto ml-auto" type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</Button>
           </form>
         </div>

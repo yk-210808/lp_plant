@@ -6,10 +6,12 @@ import React, { useEffect, useState } from 'react';
 
 type Props = {
   limit: number;
-  apiData: plantsType
+  perPage: number;
+  apiData: plantsType;
+  mvFlg?: boolean;
 }
 
-export const Slider: React.FC<Props> = ({ limit, apiData }) => {
+export const Slider: React.FC<Props> = ({ limit, perPage, apiData, mvFlg }) => {
   const [data, setData] = useState<contents[]>([]);
 
   useEffect(() => {
@@ -17,11 +19,19 @@ export const Slider: React.FC<Props> = ({ limit, apiData }) => {
 
     if (apiData && data.length === 0) {
       const api = apiData.contents;
-      newData = api.filter((value) => value.trendy_mv).slice(0, limit);
+
+      if (mvFlg) {
+        newData = api.filter((value) => value.trendy_mv)
+      } else {
+        newData = api
+      }
+      newData = newData.slice(0, limit);
 
       setData(newData);
     }
   }, [])
+
+
 
   return (
     <>
@@ -29,6 +39,15 @@ export const Slider: React.FC<Props> = ({ limit, apiData }) => {
         hasTrack={false}
         options={{
           gap: '40px',
+          perPage: perPage,
+          breakpoints: {
+            768: {
+              perPage: 1
+            },
+            1200: {
+              perPage: (!mvFlg) ? 2 : 1
+            }
+          }
         }}
       >
         <SplideTrack>
@@ -41,7 +60,7 @@ export const Slider: React.FC<Props> = ({ limit, apiData }) => {
                   <div className='txt-box'>
                     <p className="cat">{value.category.title}</p>
                     <p className="name">{value.name}</p>
-                    <Link href="#" className='c-btn01'>Buy Now</Link>
+                    <Link href="/plants/detail/[id]" as={`/plants/detail/${value.id}`} className='c-btn01'>Buy Now</Link>
                   </div>
                 </div>
               </div>

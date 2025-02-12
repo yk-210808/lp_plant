@@ -57,3 +57,25 @@
     text-transform: capitalize;
   }
 }
+
+.c-ttl02 {
+  font-size: 55px;
+  padding-left: 1em;
+  position: relative;
+
+  @include sp {
+    font-size: 32px;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 0.5em;
+    height: 4px;
+    background-color: $clear_white;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}

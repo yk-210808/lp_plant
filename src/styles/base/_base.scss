@@ -288,3 +288,177 @@ button::after {
     }
   }
 }
+
+// slider
+.slider {
+  .splide__arrows {
+    svg {
+      display: none;
+    }
+  }
+
+  .splide__arrow {
+    background-color: transparent;
+    top: 75.5%;
+
+    @include sp {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      border-top: 3px solid rgba($color: #fff, $alpha: 0.75);
+      border-right: 3px solid rgba($color: #fff, $alpha: 0.75);
+
+      @include sp {
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+      }
+    }
+
+    &--prev {
+      left: 20px;
+
+      @include sp {
+        left: 4px;
+      }
+
+      &::after {
+        transform: rotate(-135deg);
+      }
+    }
+
+    &--next {
+      right: 33px;
+
+      @include sp {
+        right: 4px;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    &:disabled {
+      opacity: 0;
+    }
+  }
+
+  .splide__pagination {
+    bottom: 42px;
+
+    @include sp {
+      bottom: 20px;
+    }
+
+    &__page {
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      opacity: 1;
+      transition: width $transition01;
+      border-radius: 46px;
+      margin: 0 6px;
+
+      &.is-active {
+        width: 21px;
+        height: 6px;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.slider-wide {
+    .splide__arrows {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      position: absolute;
+      right: 90px;
+      bottom: 17%;
+
+      @include pc {
+        @include max(850) {
+          right: 40px;
+          bottom: 4%;
+        }
+      }
+
+      @include sp {
+        bottom: 2%;
+        right: 20px;
+      }
+    }
+
+    .slide-number {
+      display: flex;
+      align-items: center;
+
+      .current {
+        font-size: 20px;
+        font-weight: bold;
+
+        @include sp {
+          font-size: 16px;
+        }
+      }
+
+      .total {
+        padding-left: 0.6em;
+        position: relative;
+        font-size: 15px;
+        font-weight: bold;
+
+        @include sp {
+          font-size: 12px;
+          padding-left: 0.7em;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 18px;
+          background-color: rgba($color: #fff, $alpha: 0.75);
+          left: 0.3em;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          transform: rotate(20deg);
+        }
+      }
+    }
+
+    .splide__arrow {
+      position: static;
+      transform: none;
+
+      &:disabled {
+        opacity: 0.35;
+      }
+    }
+
+    .splide__pagination {
+      bottom: -68px;
+
+      @include sp {
+        bottom: -25px;
+      }
+
+      @include pc{
+        &__page {
+          width: 11px;
+          height: 11px;
+  
+          &.is-active {
+            width: 31px;
+          }
+        }
+      }
+    }
+  }
+}

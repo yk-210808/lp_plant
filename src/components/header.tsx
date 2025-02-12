@@ -127,7 +127,7 @@ export default function Header() {
           </ul>
           <div className="nav-area">
             <Link href="/search" className="nav-btn"><img src="/img/icon_search.png" alt="" /></Link>
-            <Link href="#" className="nav-btn opacity-80"><img src="/img/icon_bag.png" alt="" /></Link>
+            <Link href="/plants/all" className="nav-btn opacity-80"><img src="/img/icon_bag.png" alt="" /></Link>
             <button type="button" className="nav-btn hamburger sp" ref={hamburgerRef} onClick={handleMenu}>
               <span></span>
               <span></span>

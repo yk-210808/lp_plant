@@ -2,15 +2,20 @@ export type contents = {
   id: string;
   name: string;
   description: string;
+  detail?: string;
   price: string;
   image: { url: string };
-  category: { 
+  category: {
     title: string;
     slug: string;
+    id: string;
   };
-  trendy :boolean;
+  trendy: boolean;
   trendy_mv: boolean;
   best: boolean;
+  slider?: [{
+    url: string
+  }]
 }
 
 export type plantsType = {

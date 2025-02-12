@@ -25,7 +25,7 @@ export default function Page({ voiceApiData, plantsApiData }: { voiceApiData: vo
               </div>
               <div className="product-slide-area">
                 <div className="product-slide slider">
-                  <Slider limit={3} apiData={plantsApiData} />
+                  <Slider limit={3} perPage={1} mvFlg={true} apiData={plantsApiData} />
                 </div>
               </div>
             </div>
