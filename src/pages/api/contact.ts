@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer"
 import { z } from "zod";
+import sanitizeHtml from "sanitize-html";
 
 // validationSchema
 const contactSchema = z.object({
@@ -23,7 +24,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
-  const { name, email, message } = validation.data;
+  // sanitize
+  const sanitizedData = {
+    name: sanitizeHtml(validation.data.name, {
+      allowedTags: [],
+      allowedAttributes: {},
+    }),
+    email: validation.data.email,
+    message: sanitizeHtml(validation.data.message, {
+      allowedTags: [],
+      allowedAttributes: {}, 
+    }),
+  };
+
+  const { name, email, message } = sanitizedData;
 
   // debug
   // console.log("お問い合わせ:", { name, email, message });
