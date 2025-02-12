@@ -12,6 +12,7 @@ import { contents, plantsType } from "@/types/api/plantsType";
 import { voiceType } from '@/types/api/voiceType';
 import { convertLfToBr } from '@/utils/commonUtil';
 import Head from 'next/head';
+import Image from "next/image"
 
 export default function PlantsDetail({ plantApiData, voiceApiData }: { plantApiData: contents, voiceApiData: voiceType }) {
   const router = useRouter()
@@ -70,7 +71,7 @@ export default function PlantsDetail({ plantApiData, voiceApiData }: { plantApiD
                     {sliderImage.map((value) => (
                       <SplideSlide key={Math.random()}>
                         <div className="slide-item">
-                          <img src={value.url} alt="" />
+                          <Image width="800" height="800" src={value.url} alt="" />
                         </div>
                       </SplideSlide>
                     ))}

@@ -9,12 +9,8 @@ export const PlantsCategoryProvider = ({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response: plantsCategoryType = await apiClient.get({ endpoint: "plants_category" });
-        setPlantsCategory(response.contents);
-      } catch (err) {
-        // console.log(err);
-      }
+      const response: plantsCategoryType = await apiClient.get({ endpoint: "plants_category" });
+      setPlantsCategory(response.contents);
     };
 
     fetchData();

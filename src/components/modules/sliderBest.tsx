@@ -5,6 +5,7 @@ import '@splidejs/react-splide/css';
 import Link from 'next/link';
 import { plantsCategoryContext } from '@/contexts/plantsCategoryContext';
 import { convertLfToBr } from '@/utils/commonUtil';
+import Image from "next/image"
 
 interface SplideInstance {
   index: number;
@@ -47,7 +48,7 @@ export const SliderBest = () => {
             <SplideSlide key={value.id}>
               <div className="c-card wide">
                 <span className='mask'><span className='inn'></span></span>
-                <div className="overflow-img"><img src={value.image.url} alt="" /></div>
+                <div className="overflow-img"><Image width="600" height="600" src={value.image.url} alt="" /></div>
                 <div className='wide-box'>
                   <h3 className="name">We Have Small And Best {value.title} Collection’s</h3>
                   <p className="description" dangerouslySetInnerHTML={{ __html: convertLfToBr(value.description) }}></p>

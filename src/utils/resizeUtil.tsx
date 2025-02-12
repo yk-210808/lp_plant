@@ -1,7 +1,7 @@
 const breakPoint = 768
 
-export const checkBreakPoint = (ev?: MediaQueryListEvent) => {
-  const body = (typeof document !== 'undefined') ? document.querySelector<HTMLElement>('body') : '';
+export const checkBreakPoint = () => {
+  // const body = (typeof document !== 'undefined') ? document.querySelector<HTMLElement>('body') : '';
   const mql = window.matchMedia('screen and (max-width: ' + breakPoint + 'px)')
   let deviceFlg = mql.matches ? 1 : 0; // 0 : PC ,  1 : SP
   // → PC

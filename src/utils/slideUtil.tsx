@@ -1,6 +1,6 @@
 export const slideUp = (el: HTMLElement, duration = 300) => {
   el.style.height = el.offsetHeight + "px";
-  el.offsetHeight;
+  // el.offsetHeight;
   el.style.transitionProperty = "height, margin, padding";
   el.style.transitionDuration = duration + "ms";
   el.style.transitionTimingFunction = "ease";
@@ -31,13 +31,13 @@ export const slideDown = (el: HTMLElement, duration = 300) => {
     display = "block";
   }
   el.style.display = display;
-  let height = el.offsetHeight;
+  const height = el.offsetHeight;
   el.style.height = "0px";
   el.style.paddingTop = "0px";
   el.style.paddingBottom = "0px";
   el.style.marginTop = "0px";
   el.style.marginBottom = "0px";
-  el.offsetHeight;
+  // el.offsetHeight;
   el.style.transitionProperty = "height, margin, padding";
   el.style.transitionDuration = duration + "ms";
   el.style.transitionTimingFunction = "ease";

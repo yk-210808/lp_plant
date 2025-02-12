@@ -36,7 +36,7 @@ export default function Plants() {
    * API
    */
   useEffect(() => {
-    let filter = categoryId ? `category[equals]${categoryId}` : ''
+    const filter = categoryId ? `category[equals]${categoryId}` : ''
 
     const fetchData = async () => {
       // setLoading(true);

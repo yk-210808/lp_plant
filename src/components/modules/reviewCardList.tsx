@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import Image from "next/image"
 import { voiceType, contents } from '@/types/api/voiceType'
 
 type Props = {
@@ -63,14 +64,14 @@ export const ReviewCardList: React.FC<Props> = ({ limit, mvFlg, apiData }) => {
           <div className="c-card small" key={value.id}>
             <span className='mask'><span className='inn'></span></span>
             <div className="review-items">
-              <div className="review-img"><img src={value.image.url} alt="" /></div>
+              <div className="review-img"><Image width="90" height="90" src={value.image.url} alt="" /></div>
               <div className='prof'>
                 <p className="review-name">{value.name}</p>
                 <div className="star">
                   {Array(Math.trunc(value.evaluation[0])).fill(null).map((_, index) => (
-                    <img key={index + 1} src="/img/icon_star_full.svg" alt="" />
+                    <Image width="20" height="20" key={index + 1} src="/img/icon_star_full.svg" alt="" />
                   ))}
-                  { getDecimalPoint(value.evaluation[0]) > 0 && <img src="/img/icon_star_half.svg" alt="" /> }
+                  { getDecimalPoint(value.evaluation[0]) > 0 && <Image width="20" height="20" src="/img/icon_star_half.svg" alt="" /> }
                 </div>
               </div>
             </div>

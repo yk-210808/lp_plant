@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import React, { useEffect, useRef, useState, useContext } from "react"
 import { useScrollCtrl } from "@/hooks/useScrollCtrl"
 import { slideUp, slideDown } from "@/utils/slideUtil"
@@ -126,8 +127,8 @@ export default function Header() {
             <li><Link href="/contact"><span className="txt">Contact</span></Link></li>
           </ul>
           <div className="nav-area">
-            <Link href="/search" className="nav-btn"><img src="/img/icon_search.png" alt="" /></Link>
-            <Link href="/plants/all" className="nav-btn opacity-80"><img src="/img/icon_bag.png" alt="" /></Link>
+            <Link href="/search" className="nav-btn"><Image width="24" height="24" src="/img/icon_search.png" alt="" /></Link>
+            <Link href="/plants/all" className="nav-btn opacity-80"><Image width="24" height="24" src="/img/icon_bag.png" alt="" /></Link>
             <button type="button" className="nav-btn hamburger sp" ref={hamburgerRef} onClick={handleMenu}>
               <span></span>
               <span></span>

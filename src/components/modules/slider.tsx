@@ -3,6 +3,7 @@ import '@splidejs/react-splide/css';
 import Link from 'next/link';
 import { plantsType, contents } from '@/types/api/plantsType';
 import React, { useEffect, useState } from 'react';
+import Image from "next/image"
 
 type Props = {
   limit: number;
@@ -56,7 +57,7 @@ export const Slider: React.FC<Props> = ({ limit, perPage, apiData, mvFlg }) => {
               <div className="slide-item c-card">
                 <span className='mask'><span className='inn'></span></span>
                 <div className='box'>
-                  <div className='thumb'><img src={value.image.url} alt="" /></div>
+                  <div className='thumb'><Image width="600" height="600" src={value.image.url} alt="" /></div>
                   <div className='txt-box'>
                     <p className="cat">{value.category.title}</p>
                     <p className="name">{value.name}</p>
