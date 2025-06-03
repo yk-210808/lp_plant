@@ -120,8 +120,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let plantsData = {} as plantsType; 
   let allCategories = [] as plantsCategoryContents[]; 
 
-  let debug;
-
   let categoryIdForFilter: string | undefined = undefined;
 
   const categoriesData = await apiClient.get({ endpoint: 'plants_category' });
