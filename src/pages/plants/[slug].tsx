@@ -161,7 +161,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       currentPage: currentPageInternal,
       plantsCategories: allCategories,
       key: `${currentSlugInternal}-${searchParamInternal}-${currentPageInternal}`,
-      debug: allCategories
     }
   };
 }
