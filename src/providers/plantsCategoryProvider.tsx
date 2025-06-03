@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { plantsCategoryContext } from "@/contexts/plantsCategoryContext";
-import { plantsCategoryType, contents } from "@/types/api/plantsCategoryType";
+import { plantsCategoryType, plantsCategoryContents } from "@/types/api/plantsCategoryType";
 import { apiClient } from "@/components/api/apiClient";
 
 export const PlantsCategoryProvider = ({ children }: { children: React.ReactNode }) => {
-  const [plantsCategory, setPlantsCategory] = useState<contents[]>([])
+  const [plantsCategory, setPlantsCategory] = useState<plantsCategoryContents[]>([])
   const value = { plantsCategory, setPlantsCategory }
 
   useEffect(() => {

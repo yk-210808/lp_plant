@@ -1,23 +1,36 @@
 import { useEffect, useState, useContext, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
-import { GetServerSideProps } from "next";
+import type { GetServerSideProps } from "next";
 import { useRouter } from 'next/router'
 import { Select } from "flowbite-react";
 import { Pagination, CardList } from '@/components'
 import { apiClient } from '@/components/api/apiClient';
 import { contents, plantsType } from '@/types/api/plantsType';
+import { plantsCategoryContents } from '@/types/api/plantsCategoryType';
 import { plantsCategoryContext } from '@/contexts/plantsCategoryContext';
 import { isObjectEmpty } from '@/utils/commonUtil';
 import Head from 'next/head';
 
 const limit = 6;
 
-export default function Plants() {
+interface Props {
+  plantsApiData: plantsType;
+  currentSlug: string;
+  searchParam: string;
+  currentPage: number;
+  plantsCategories: contents[];
+}
+
+export default function Plants({
+  plantsApiData,
+  // currentSlug,
+  // searchParam: searchParamFromProps,
+  // currentPage: currentPageFromProps,
+  // plantsCategories: plantsCategoriesFromProps,
+}: Props) {
   const router = useRouter();
   const searchParam = router.query.search ? router.query.search : '';
-  const [plantsApiData, setPlantsApiData] = useState<plantsType>();
   const { plantsCategory } = useContext(plantsCategoryContext)
-  // const [loading, setLoading] = useState(false);
 
   const apiTotalCount = plantsApiData?.totalCount ?? 0;
   const totalPages = Math.ceil(apiTotalCount / limit);
@@ -31,36 +44,6 @@ export default function Plants() {
     if (plantsCategory.length > 0) return plantsCategory.find((value) => value.slug === category)?.id
   }, [plantsCategory, category])
 
-  /**
-   * API
-   */
-  useEffect(() => {
-    const filter = categoryId ? `category[equals]${categoryId}` : ''
-
-    const fetchData = async () => {
-      // setLoading(true);
-      const offset = ((currentPage - 1) * limit < 0) ? undefined : (currentPage - 1) * limit;
-      const q = Array.isArray(searchParam) ? searchParam.join(',') : searchParam
-
-      const data = await apiClient.get({
-        endpoint: "plants",
-        queries: {
-          limit,
-          offset,
-          filters: filter,
-          q
-        },
-      });
-      setPlantsApiData(data);
-      // setLoading(false);
-    };
-
-    fetchData();
-  }, [router.query.slug, categoryId, currentPage, searchParam]);
-
-  /**
-   * Select Box
-   */
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
@@ -91,12 +74,12 @@ export default function Plants() {
 
   return (
     <>
-    <Head>
-      <title>{pageTitle().toUpperCase()} | Planto.</title>
-      <meta property="og:title" content={pageTitle().toUpperCase() + " | Planto."} />
-      <meta name="description" content={categoryDescription ?? pageTitle().toUpperCase()}></meta>
-      <meta property="og:description" content={categoryDescription ?? pageTitle().toUpperCase()} />
-    </Head>
+      <Head>
+        <title>{pageTitle().toUpperCase()} | Planto.</title>
+        <meta property="og:title" content={pageTitle().toUpperCase() + " | Planto."} />
+        <meta name="description" content={categoryDescription ?? pageTitle().toUpperCase()}></meta>
+        <meta property="og:description" content={categoryDescription ?? pageTitle().toUpperCase()} />
+      </Head>
 
       <div className="p_common p_plants">
         <div className="plants-block">
@@ -106,7 +89,7 @@ export default function Plants() {
               <p>Type :</p>
               <Select className='c-select' value={selected} onChange={(e) => handleChange(e)}>
                 <option value="all">all</option>
-  
+
                 {!isObjectEmpty(plantsCategory) && plantsCategory.map((value) => (
                   <option
                     key={value.id}
@@ -127,27 +110,58 @@ export default function Plants() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { slug, p } = query;
-  const currentPage = Number(p) > 0 ? Number(p) : 1;
-  const offset = (currentPage - 1) * limit;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { slug, p, search } = context.query;
+  const currentSlugInternal = Array.isArray(slug) ? slug[0] : slug || 'all';
+  const currentPageInternal = Number(p) > 0 ? Number(p) : 1;
+  const offset = (currentPageInternal - 1) * limit < 0 ? 0 : (currentPageInternal - 1) * limit;
+  const searchParamInternal = Array.isArray(search) ? search.join(',') : search || '';
 
-  const plants_data = await apiClient.get({
-    endpoint: "plants",
-    queries: { limit, offset },
-  });
+  let plantsData = {} as plantsType; 
+  let allCategories = [] as plantsCategoryContents[]; 
 
-  // instead getStaticPaths
-  const allowedSlugs = plants_data.contents.map((value: contents) => value.category.slug)
-  allowedSlugs.push('all')
+  let debug;
 
-  if (!allowedSlugs.includes(slug)) {
-    return {
-      notFound: true,
-    };
+  let categoryIdForFilter: string | undefined = undefined;
+
+  const categoriesData = await apiClient.get({ endpoint: 'plants_category' });
+  allCategories = Array.isArray(categoriesData?.contents) ? categoriesData.contents : [];
+
+  if (currentSlugInternal !== 'all') {
+    const categoryObject = allCategories.find(cat => cat.slug === currentSlugInternal);
+    if (categoryObject) {
+      categoryIdForFilter = categoryObject.id;
+    } else {
+      if (allCategories.length > 0) { 
+        return { notFound: true };
+      }
+    }
   }
 
+
+
+  const apiFilter = categoryIdForFilter ? `category[equals]${categoryIdForFilter}` : '';
+
+  const fetchedPlantsData = await apiClient.get({
+    endpoint: "plants",
+    queries: {
+      limit,
+      offset,
+      filters: apiFilter,
+      q: searchParamInternal,
+    },
+  });
+  plantsData = fetchedPlantsData;
+
   return {
-    props: {}
+    props: {
+      plantsApiData: plantsData,
+      currentSlug: currentSlugInternal,
+      searchParam: searchParamInternal,
+      currentPage: currentPageInternal,
+      plantsCategories: allCategories,
+      key: `${currentSlugInternal}-${searchParamInternal}-${currentPageInternal}`,
+      debug: allCategories
+    }
   };
-};
+}

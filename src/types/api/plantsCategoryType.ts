@@ -1,4 +1,4 @@
-export type contents = {
+export type plantsCategoryContents = {
   id: string;
   title: string;
   slug: string;
@@ -7,5 +7,5 @@ export type contents = {
 }
 
 export type plantsCategoryType = {
-  contents: [contents]
+  contents: [plantsCategoryContents]
 }
